@@ -5,10 +5,10 @@
       "name": "mongo-hicetnunc"
     },
     "provider": {
-      "stage": "dev",
-      "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "name": "aws",
       "runtime": "nodejs12.x",
+      "stage": "dev",
+      "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "region": "us-east-1",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -55,6 +55,21 @@
                               "Ref": "ServerlessDeploymentBucket"
                             },
                             "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
                           ]
                         ]
                       }
@@ -159,32 +174,32 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/mongo-hicetnunc/dev/1619427075081-2021-04-26T08:51:15.081Z/mongo-hicetnunc.zip"
+                "S3Key": "serverless/mongo-hicetnunc/dev/1619566576195-2021-04-27T23:36:16.195Z/mongo-hicetnunc.zip"
               },
-              "FunctionName": "mongo-hicetnunc-dev-handler",
               "Handler": "handler.database",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "mongo-hicetnunc-dev-handler",
               "MemorySize": 1024,
+              "Timeout": 6,
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              },
-              "Runtime": "nodejs12.x",
-              "Timeout": 6
+              }
             },
             "DependsOn": [
               "HandlerLogGroup"
             ]
           },
-          "HandlerLambdaVersionSaNl6VNGlub1KvTsNQPRDHiWuCWrQ943gwbn61RDesE": {
+          "HandlerLambdaVersionwtltpTlkH64bI9sAl0nwgA37oiWCG7mmjkTyjx0t0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandlerLambdaFunction"
               },
-              "CodeSha256": "QhfM2RFHlERQlNLg0BOYFwAZmbTsDkd5brgpbivjrmY="
+              "CodeSha256": "DJVskb/x5lf+E8ujhoEj8hoWJ20tSiNX8/viMiJu7DU="
             }
           },
           "ApiGatewayRestApi": {
@@ -396,7 +411,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1619427068583": {
+          "ApiGatewayDeployment1619566570486": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -453,12 +468,18 @@
           "ServerlessDeploymentBucketName": {
             "Value": {
               "Ref": "ServerlessDeploymentBucket"
+            },
+            "Export": {
+              "Name": "sls-mongo-hicetnunc-dev-ServerlessDeploymentBucketName"
             }
           },
           "HandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandlerLambdaVersionSaNl6VNGlub1KvTsNQPRDHiWuCWrQ943gwbn61RDesE"
+              "Ref": "HandlerLambdaVersionwtltpTlkH64bI9sAl0nwgA37oiWCG7mmjkTyjx0t0"
+            },
+            "Export": {
+              "Name": "sls-mongo-hicetnunc-dev-HandlerLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -482,6 +503,9 @@
                   "/dev"
                 ]
               ]
+            },
+            "Export": {
+              "Name": "sls-mongo-hicetnunc-dev-ServiceEndpoint"
             }
           }
         }
@@ -530,6 +554,21 @@
                               "Ref": "ServerlessDeploymentBucket"
                             },
                             "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
                           ]
                         ]
                       }
@@ -616,15 +655,17 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HandlerLambdaVersionSaNl6VNGlub1KvTsNQPRDHiWuCWrQ943gwbn61RDesE"
+        "versionLogicalId": "HandlerLambdaVersionwtltpTlkH64bI9sAl0nwgA37oiWCG7mmjkTyjx0t0"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "layers": {},
     "initialServerlessConfig": {
-      "service": "mongo-hicetnunc",
-      "frameworkVersion": "2.8.0",
+      "service": {
+        "$ref": "$[\"service\"][\"serviceObject\"]"
+      },
+      "frameworkVersion": "2.38.0",
       "package": {
         "exclude": [
           "node_modules/**"
@@ -855,35 +896,35 @@
           "node_modules/bson/LICENSE.md",
           "node_modules/bson/package.json",
           "node_modules/bson/README.md",
-          "node_modules/mongodb/node_modules/bl/bl.js",
-          "node_modules/mongodb/node_modules/bl/LICENSE.md",
-          "node_modules/mongodb/node_modules/bl/package.json",
-          "node_modules/mongodb/node_modules/bl/README.md",
-          "node_modules/mongodb/node_modules/bl/test/indexOf.js",
-          "node_modules/mongodb/node_modules/bl/test/test.js",
-          "node_modules/mongodb/node_modules/readable-stream/CONTRIBUTING.md",
-          "node_modules/mongodb/node_modules/readable-stream/doc/wg-meetings/2015-01-30.md",
-          "node_modules/mongodb/node_modules/readable-stream/duplex-browser.js",
-          "node_modules/mongodb/node_modules/readable-stream/duplex.js",
-          "node_modules/mongodb/node_modules/readable-stream/GOVERNANCE.md",
-          "node_modules/mongodb/node_modules/readable-stream/lib/_stream_duplex.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/_stream_passthrough.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/_stream_readable.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/_stream_transform.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/_stream_writable.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/internal/streams/BufferList.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/internal/streams/destroy.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/internal/streams/stream-browser.js",
-          "node_modules/mongodb/node_modules/readable-stream/lib/internal/streams/stream.js",
-          "node_modules/mongodb/node_modules/readable-stream/LICENSE",
-          "node_modules/mongodb/node_modules/readable-stream/package.json",
-          "node_modules/mongodb/node_modules/readable-stream/passthrough.js",
-          "node_modules/mongodb/node_modules/readable-stream/readable-browser.js",
-          "node_modules/mongodb/node_modules/readable-stream/readable.js",
-          "node_modules/mongodb/node_modules/readable-stream/README.md",
-          "node_modules/mongodb/node_modules/readable-stream/transform.js",
-          "node_modules/mongodb/node_modules/readable-stream/writable-browser.js",
-          "node_modules/mongodb/node_modules/readable-stream/writable.js",
+          "node_modules/bl/bl.js",
+          "node_modules/bl/LICENSE.md",
+          "node_modules/bl/package.json",
+          "node_modules/bl/README.md",
+          "node_modules/bl/test/indexOf.js",
+          "node_modules/bl/test/test.js",
+          "node_modules/readable-stream/CONTRIBUTING.md",
+          "node_modules/readable-stream/doc/wg-meetings/2015-01-30.md",
+          "node_modules/readable-stream/duplex-browser.js",
+          "node_modules/readable-stream/duplex.js",
+          "node_modules/readable-stream/GOVERNANCE.md",
+          "node_modules/readable-stream/lib/_stream_duplex.js",
+          "node_modules/readable-stream/lib/_stream_passthrough.js",
+          "node_modules/readable-stream/lib/_stream_readable.js",
+          "node_modules/readable-stream/lib/_stream_transform.js",
+          "node_modules/readable-stream/lib/_stream_writable.js",
+          "node_modules/readable-stream/lib/internal/streams/BufferList.js",
+          "node_modules/readable-stream/lib/internal/streams/destroy.js",
+          "node_modules/readable-stream/lib/internal/streams/stream-browser.js",
+          "node_modules/readable-stream/lib/internal/streams/stream.js",
+          "node_modules/readable-stream/LICENSE",
+          "node_modules/readable-stream/package.json",
+          "node_modules/readable-stream/passthrough.js",
+          "node_modules/readable-stream/readable-browser.js",
+          "node_modules/readable-stream/readable.js",
+          "node_modules/readable-stream/README.md",
+          "node_modules/readable-stream/transform.js",
+          "node_modules/readable-stream/writable-browser.js",
+          "node_modules/readable-stream/writable.js",
           "node_modules/util-deprecate/browser.js",
           "node_modules/util-deprecate/History.md",
           "node_modules/util-deprecate/LICENSE",
@@ -1343,25 +1384,24 @@
           "node_modules/negotiator/package.json",
           "node_modules/negotiator/README.md"
         ],
-        "artifact": "/home/crzy/Desktop/lambdas/mongo-hicetnunc/.serverless/mongo-hicetnunc.zip",
-        "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619427075081-2021-04-26T08:51:15.081Z"
+        "artifact": "/home/crzy/Desktop/lambdas/mongo2/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip",
+        "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619566576195-2021-04-27T23:36:16.195Z"
       },
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
       },
       "provider": {
-        "name": "aws",
-        "runtime": "nodejs12.x"
+        "$ref": "$[\"service\"][\"provider\"]"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
       }
     },
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/crzy/Desktop/lambdas/mongo-hicetnunc/.serverless/mongo-hicetnunc.zip"
+    "artifact": "/home/crzy/Desktop/lambdas/mongo2/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619427075081-2021-04-26T08:51:15.081Z",
+    "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619566576195-2021-04-27T23:36:16.195Z",
     "artifact": "mongo-hicetnunc.zip"
   }
 }

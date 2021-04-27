@@ -6,11 +6,13 @@ const MongoClient = require('mongodb').MongoClient
 require('dotenv').config()
 
 const url = process.env.MONGO_URI
-const dev = 'https://api.better-call.dev/v1/contract/mainnet/KT1RJ6PbjHpwc3M5rw5s2Nbmefwbuwbdxton/tokens'
 
 const app = express()
 app.use(express.json())
 app.use(cors({ origin: '*' }))
+
+// burned objkts
+// tz1burnburnburnburnburnburnburjAYjjX
 
 // get objkts by tag
 
@@ -20,7 +22,8 @@ const getTag = async (req, res) => {
   await client.connect()
   const database = client.db('OBJKTs-DB')
   const objkts = database.collection('metadata')
-  let r = await objkts.find({ tags : { $all : [ req.body.tag ]}})
+  let r = await objkts.find({ tags : { $all : [ req.query.tag ]}})
+  console.log(r.toArray)
   res.json({
       result : await r.toArray()
   })
@@ -29,12 +32,15 @@ const getTag = async (req, res) => {
 // get objkt by id
 
 const getObjkt = async (req, res) => {
+  console.log(req.query)
   const client = new MongoClient(url)
 
   await client.connect()
   const database = client.db('OBJKTs-DB')
   const objkts = database.collection('metadata')
-  let r = await objkts.find({ token_id : req.body.token_id })
+  let r = await objkts.find({ token_id : parseInt(req.query.token_id) })
+  console.log(r.toArray)
+
   res.json({
       result : await r.toArray()
   })
@@ -42,15 +48,29 @@ const getObjkt = async (req, res) => {
 
 // get objkts by ids
 
-// todo
+const getObjkts = async (req, res) => {
+  const client = new MongoClient(url)
 
-app.post('/tag', async (req, res) => {
+  await client.connect()
+  const database = client.db('OBJKTs-DB')
+  const objkts = database.collection('metadata')
+  let r = await objkts.find({ token_id : { $in : req.body.arr }})
+  res.json({
+    result : await r.toArray()
+  })
+}
+
+app.get('/tag', async (req, res) => {
   await getTag(req, res)
 })
 
-app.post('/objkt', async (req, res) => {
+app.get('/objkt', async (req, res) => {
   await getObjkt(req, res)
 })
 
-//app.listen(3001)
+app.post('/objkts', async (req, res) => {
+  await getObjkts(req, res)
+})
+
+//app.listen(3002)
 module.exports.database = serverless(app)

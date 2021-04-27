@@ -2,7 +2,7 @@
 
 service: mongo-hicetnunc
 
-frameworkVersion: '2.8.0'
+frameworkVersion: '2.38.0'
 
 package:
   exclude:
