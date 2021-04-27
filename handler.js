@@ -23,7 +23,6 @@ const getTag = async (req, res) => {
   const database = client.db('OBJKTs-DB')
   const objkts = database.collection('metadata')
   let r = await objkts.find({ tags : { $all : [ req.query.tag ]}})
-  console.log(r.toArray)
   res.json({
       result : await r.toArray()
   })
@@ -32,14 +31,12 @@ const getTag = async (req, res) => {
 // get objkt by id
 
 const getObjkt = async (req, res) => {
-  console.log(req.query)
   const client = new MongoClient(url)
 
   await client.connect()
   const database = client.db('OBJKTs-DB')
   const objkts = database.collection('metadata')
   let r = await objkts.find({ token_id : parseInt(req.query.token_id) })
-  console.log(r.toArray)
 
   res.json({
       result : await r.toArray()
