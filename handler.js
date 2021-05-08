@@ -22,7 +22,9 @@ const getTag = async (req, res) => {
   await client.connect()
   const database = client.db('OBJKTs-DB')
   const objkts = database.collection('metadata')
-  let r = await objkts.find({ tags : { $all : [ req.query.tag ]}})
+  let r = await objkts
+    .find({ tags : { $all : [ req.query.tag ] } })
+    .collation({locale: 'en', strength: 1})
   res.json({
       result : await r.toArray()
   })
