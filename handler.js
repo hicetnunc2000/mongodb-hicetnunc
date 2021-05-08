@@ -53,6 +53,32 @@ const getUniqueTags = async (req, res) => {
   }
 }
 
+// get token owners by owner_id and/or token_id
+const getTokenOwners = async (req, res) => {
+  try {
+    const objkt = parseInt(req.query.objkt_id)
+    //TODO: moar validation
+    if (!objkt || objkt < 0 || (typeof objkt !=='number')) {
+      throw(400)
+    }
+    const client = new MongoClient(url)
+    await client.connect()
+    const database = client.db('OBJKTs-DB')
+    const owners = database.collection('owners')
+    const query = { "token_id": objkt , "balance": {"$ne": 0}}
+    let r = await owners.find(query).toArray()
+    var obj = Object.assign({}, ...(r.map(item => ({ [item.owner_id]: item.balance }) )))
+    res.json(obj)
+  } catch(e) {
+    switch (e) {
+      case 400:
+        res.status(400).json({"message":"bad request"})
+      default:
+        res.status(500).json(e)
+    }
+  }
+}
+
 // get objkt by id
 
 const getObjkt = async (req, res) => {
@@ -81,6 +107,10 @@ const getObjkts = async (req, res) => {
     result : await r.toArray()
   })
 }
+
+app.get('/owners', async (req, res) => {
+  await getTokenOwners(req, res)
+})
 
 app.get('/tag', async (req, res) => {
   await getTag(req, res)
