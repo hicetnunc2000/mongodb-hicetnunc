@@ -28,6 +28,29 @@ const getTag = async (req, res) => {
   })
 }
 
+// get unique tags
+
+const getUniqueTags = async (req, res) => {
+  const client = new MongoClient(url)
+
+  await client.connect()
+  const database = client.db('OBJKTs-DB')
+  const objkts = database.collection('metadata')
+  try {
+    let r = await objkts.aggregate([
+      { $project: { tags: 1, count: { $add: 1 } } },
+      { $unwind: '$tags'},
+      { $group: { _id: { tag: '$tags', lower: { $toLower : '$tags' } }, count: { $sum: '$count' } } },
+      { $sort: { "count": -1 } }
+    ])
+    res.json({
+        result : await r.toArray()
+    })
+  } catch(e) {
+    res.status(500).json(e)
+  }
+}
+
 // get objkt by id
 
 const getObjkt = async (req, res) => {
@@ -59,6 +82,10 @@ const getObjkts = async (req, res) => {
 
 app.get('/tag', async (req, res) => {
   await getTag(req, res)
+})
+
+app.get('/unique_tags', async (req, res) => {
+  await getUniqueTags(req, res)
 })
 
 app.get('/objkt', async (req, res) => {
