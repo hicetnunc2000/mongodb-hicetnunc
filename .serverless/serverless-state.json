@@ -174,7 +174,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/mongo-hicetnunc/dev/1619567312330-2021-04-27T23:48:32.330Z/mongo-hicetnunc.zip"
+                "S3Key": "serverless/mongo-hicetnunc/dev/1619808035597-2021-04-30T18:40:35.597Z/mongo-hicetnunc.zip"
               },
               "Handler": "handler.database",
               "Runtime": "nodejs12.x",
@@ -192,14 +192,14 @@
               "HandlerLogGroup"
             ]
           },
-          "HandlerLambdaVersionltZOFi9XiCWDtyDW5lk23sqG8jBIsPQUNA8HzQNGw0": {
+          "HandlerLambdaVersionlVeItqYgq3FG772vUHrF5kE3QQLz2GFfRrTl269yyO0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandlerLambdaFunction"
               },
-              "CodeSha256": "pEAdiPFWULlwLlfP5b1en0X1dpRIBcmthoSXGSD34Z8="
+              "CodeSha256": "WvPoEZaQqaoXNO72ItwwAXaQeTAEI9PUm1e+S+OcWgU="
             }
           },
           "ApiGatewayRestApi": {
@@ -411,7 +411,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1619567306642": {
+          "ApiGatewayDeployment1619808029962": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -476,7 +476,7 @@
           "HandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandlerLambdaVersionltZOFi9XiCWDtyDW5lk23sqG8jBIsPQUNA8HzQNGw0"
+              "Ref": "HandlerLambdaVersionlVeItqYgq3FG772vUHrF5kE3QQLz2GFfRrTl269yyO0"
             },
             "Export": {
               "Name": "sls-mongo-hicetnunc-dev-HandlerLambdaFunctionQualifiedArn"
@@ -655,7 +655,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HandlerLambdaVersionltZOFi9XiCWDtyDW5lk23sqG8jBIsPQUNA8HzQNGw0"
+        "versionLogicalId": "HandlerLambdaVersionlVeItqYgq3FG772vUHrF5kE3QQLz2GFfRrTl269yyO0"
       }
     },
     "configValidationMode": "warn",
@@ -665,7 +665,7 @@
       "service": {
         "$ref": "$[\"service\"][\"serviceObject\"]"
       },
-      "frameworkVersion": "2.38.0",
+      "frameworkVersion": "2.39.0",
       "package": {
         "exclude": [
           "node_modules/**"
@@ -1384,8 +1384,8 @@
           "node_modules/negotiator/package.json",
           "node_modules/negotiator/README.md"
         ],
-        "artifact": "/home/crzy/Desktop/lambdas/mongo2/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip",
-        "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619567312330-2021-04-27T23:48:32.330Z"
+        "artifact": "/home/crzy/Desktop/programs/mongo-final/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip",
+        "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619808035597-2021-04-30T18:40:35.597Z"
       },
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
@@ -1398,10 +1398,10 @@
       }
     },
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/crzy/Desktop/lambdas/mongo2/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip"
+    "artifact": "/home/crzy/Desktop/programs/mongo-final/mongodb-hicetnunc/.serverless/mongo-hicetnunc.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619567312330-2021-04-27T23:48:32.330Z",
+    "artifactDirectoryName": "serverless/mongo-hicetnunc/dev/1619808035597-2021-04-30T18:40:35.597Z",
     "artifact": "mongo-hicetnunc.zip"
   }
 }

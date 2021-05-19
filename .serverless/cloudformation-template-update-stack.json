@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mongo-hicetnunc/dev/1619567312330-2021-04-27T23:48:32.330Z/mongo-hicetnunc.zip"
+          "S3Key": "serverless/mongo-hicetnunc/dev/1619808035597-2021-04-30T18:40:35.597Z/mongo-hicetnunc.zip"
         },
         "Handler": "handler.database",
         "Runtime": "nodejs12.x",
@@ -179,14 +179,14 @@
         "HandlerLogGroup"
       ]
     },
-    "HandlerLambdaVersionltZOFi9XiCWDtyDW5lk23sqG8jBIsPQUNA8HzQNGw0": {
+    "HandlerLambdaVersionlVeItqYgq3FG772vUHrF5kE3QQLz2GFfRrTl269yyO0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HandlerLambdaFunction"
         },
-        "CodeSha256": "pEAdiPFWULlwLlfP5b1en0X1dpRIBcmthoSXGSD34Z8="
+        "CodeSha256": "WvPoEZaQqaoXNO72ItwwAXaQeTAEI9PUm1e+S+OcWgU="
       }
     },
     "ApiGatewayRestApi": {
@@ -398,7 +398,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1619567306642": {
+    "ApiGatewayDeployment1619808029962": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -463,7 +463,7 @@
     "HandlerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HandlerLambdaVersionltZOFi9XiCWDtyDW5lk23sqG8jBIsPQUNA8HzQNGw0"
+        "Ref": "HandlerLambdaVersionlVeItqYgq3FG772vUHrF5kE3QQLz2GFfRrTl269yyO0"
       },
       "Export": {
         "Name": "sls-mongo-hicetnunc-dev-HandlerLambdaFunctionQualifiedArn"
